@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Z3 Solver Employee Ranking</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Z3 Solver Employee Ranking</h1>
+
+        <!-- 表单部分：用户输入评分 -->
+        <form id="ranking-form">
+            <h2>Input Manager Scores</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Manager/Employee</th>
+                        <th>Employee 1</th>
+                        <th>Employee 2</th>
+                        <th>Employee 3</th>
+                        <th>Employee 4</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Manager A 评分 -->
+                    <tr>
+                        <td>Manager A</td>
+                        <td><input type="number" name="score_A1" min="0" max="5" required></td>
+                        <td><input type="number" name="score_A2" min="0" max="5" required></td>
+                        <td><input type="number" name="score_A3" min="0" max="5" required></td>
+                        <td><input type="number" name="score_A4" min="0" max="5" required></td>
+                    </tr>
+                    <!-- Manager B 评分 -->
+                    <tr>
+                        <td>Manager B</td>
+                        <td><input type="number" name="score_B1" min="0" max="5" required></td>
+                        <td><input type="number" name="score_B2" min="0" max="5" required></td>
+                        <td><input type="number" name="score_B3" min="0" max="5" required></td>
+                        <td><input type="number" name="score_B4" min="0" max="5" required></td>
+                    </tr>
+                    <!-- Manager C 评分 -->
+                    <tr>
+                        <td>Manager C</td>
+                        <td><input type="number" name="score_C1" min="0" max="5" required></td>
+                        <td><input type="number" name="score_C2" min="0" max="5" required></td>
+                        <td><input type="number" name="score_C3" min="0" max="5" required></td>
+                        <td><input type="number" name="score_C4" min="0" max="5" required></td>
+                    </tr>
+                </tbody>
+            </table>
+            <button type="submit">Submit Scores</button>
+        </form>
+
+        <!-- 优化结果展示区域 -->
+        <h2>Optimized Scores and Manager Biases</h2>
+        <div id="result"></div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
+
