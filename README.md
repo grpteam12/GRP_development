@@ -1,22 +1,64 @@
-这个代码实现了一个基于Z3求解器的Java程序，来解决一个与员工评级相关的数学优化问题。具体来说，它的目标是调整管理者对员工的评分，消除管理者的偏差，从而生成公平、无偏见的员工评分。代码涉及以下几个主要步骤：
+# Employee Rating Optimization with Z3 Solver
 
-1. **初始化Z3上下文**：Z3需要一个上下文对象来管理求解器的所有操作。
+This Java program implements an optimization solution using the Z3 solver to adjust managerial ratings and eliminate bias. The goal is to generate fair and unbiased employee ratings. Below is a detailed explanation of the key components and steps of the program.
 
-2. **变量定义**：
-   - `b[i]`：表示每个管理者的偏差（bias），即管理者可能在评分中带入的系统性误差。代码中为每个管理者定义了一个偏差变量。
-   - `x[j]`：表示每个员工的无偏评分（unbiased score），即最终想要求解的员工实际表现。为每个员工定义一个无偏评分变量。
+## Key Steps
 
-3. **目标函数**：
-   - 目标是最小化管理者给出的评分（`S_{ij}`）与员工无偏评分（`x_j`）和管理者偏差（`b_i`）之间的平方误差。这是通过一个**最小二乘**的形式来实现的，即在所有员工和管理者的评分中，尽可能减少评分的调整误差。
+### 1. Initialize Z3 Context
+The Z3 solver requires a context object to manage all operations related to the solver. This context ensures that the solver can handle multiple variables, constraints, and optimization goals.
 
-4. **偏差归一化**：代码添加了一个约束，要求所有管理者的偏差总和为0（`∑b_i = 0`），这样可以避免整个系统向一个方向偏移。
+### 2. Variable Definitions
+The program defines two key sets of variables:
+- **`b[i]` (Manager Bias)**: These variables represent the bias of each manager. Manager bias is the systematic error that a manager might introduce while rating employees. For each manager, a bias variable `b[i]` is defined.
+- **`x[j]` (Unbiased Employee Score)**: These variables represent the unbiased scores of employees, which are the values we aim to compute. The unbiased score reflects the actual performance of each employee without the influence of managerial bias.
 
-5. **员工评分限制**：对员工的无偏评分设置了区间限制，保证这些评分在0到5之间（如 `0 ≤ x_j ≤ 5`），以反映实际可能的评分范围。
+### 3. Objective Function
+The primary goal is to minimize the squared error between the ratings provided by the managers (`S_{ij}`) and the unbiased employee scores (`x_j`) adjusted for managerial bias (`b_i`). This is formulated as a **least-squares minimization** problem:
+- Minimize the sum of squared differences: `minimize ∑ (S_{ij} - (x_j + b_i))^2`
+  
+This approach ensures that the adjusted ratings are as close as possible to the original ratings, while accounting for and eliminating managerial bias.
 
-6. **优化设置**：将目标函数和约束条件添加到优化问题中，并使用Z3的`opt.MkMinimize()`方法最小化平方误差。
+### 4. Bias Normalization
+To prevent the system from drifting due to the collective bias of all managers, the program introduces a normalization constraint:
+- The sum of all managerial biases must be zero: `∑b_i = 0`
 
-7. **求解和输出**：调用Z3求解器的`opt.Check()`方法来寻找解。如果有解存在，它会输出每个员工的无偏评分以及每个管理者的偏差。
+This constraint guarantees that the system as a whole does not shift in one direction due to biased managers.
 
-**输出示例**：
+### 5. Employee Score Bounds
+To ensure realistic ratings, constraints are added to restrict employee scores to a specific range. In this case, employee scores are constrained between 0 and 5:
+- `0 ≤ x_j ≤ 5`
 
-程序给出的输出示例中，`x_j`代表员工的无偏评分，而`b_i`代表管理者的系统偏差。通过对这些值的调整，可以实现对员工的公平排名。
+This reflects a typical rating scale that might be used in performance evaluations.
+
+### 6. Optimization Setup
+The objective function and constraints are added to the Z3 optimization problem. The solver is instructed to minimize the squared error using Z3's `opt.MkMinimize()` method.
+
+### 7. Solving and Output
+Finally, the program calls the Z3 solver's `opt.Check()` method to find a solution. If a solution exists, it outputs the unbiased employee scores (`x_j`) and the managerial biases (`b_i`). This allows for the adjustment of employee ratings to achieve a fair and unbiased ranking.
+
+## Example Output
+
+Here is an example of the program's output, where:
+- `x_j` represents the unbiased score for each employee
+- `b_i` represents the systematic bias for each manager
+
+```
+Employee Unbiased Scores:
+x_1 = 4.2
+x_2 = 3.7
+x_3 = 5.0
+x_4 = 2.8
+
+Manager Biases:
+b_1 = -0.3
+b_2 = 0.2
+b_3 = 0.1
+```
+
+In this example:
+- Employee 1 has an unbiased score of 4.2
+- Employee 2 has an unbiased score of 3.7
+- Manager 1 has a negative bias of -0.3, meaning they tend to underrate employees
+- Manager 2 has a positive bias of 0.2, meaning they tend to overrate employees
+
+By adjusting the scores based on these biases, the program provides fair, unbiased ratings that better reflect the true performance of employees.
