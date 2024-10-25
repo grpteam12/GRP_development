@@ -2,6 +2,8 @@
 
 This Java program implements an optimization solution using the Z3 solver to adjust managerial ratings and eliminate bias. The goal is to generate fair and unbiased employee ratings. Below is a detailed explanation of the key components and steps of the program.
 
+Chinese version：[Chinese version(Readme_cn.md)](./Readme_cn.md)
+
 ## Key Steps
 
 ### 1. Initialize Z3 Context
@@ -63,4 +65,8 @@ In this example:
 
 By adjusting the scores based on these biases, the program provides fair, unbiased ratings that better reflect the true performance of employees.
 
-###For detailed installation and configuration steps, see [Installation Instructions (Install.md)](./Install.md).
+---
+
+###Installation guide
+
+For detailed installation and configuration steps, see [Installation Instructions (Install.md)](./Install.md).
