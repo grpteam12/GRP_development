@@ -67,6 +67,6 @@ By adjusting the scores based on these biases, the program provides fair, unbias
 
 ---
 
-###Installation guide
+## Installtion guide
 
 For detailed installation and configuration steps, see [Installation Instructions (Install.md)](./Install.md).
