@@ -71,4 +71,4 @@ b_3 = 0.1
 
 ## 安装指南
 
-有关详细的安装和配置步骤，请参阅[安装说明 (Install.md)](./Install.md)。
+有关详细的安装和配置步骤，请参阅[安装说明 (Install_cn.md)](./Install_cn.md)。
