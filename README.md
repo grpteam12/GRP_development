@@ -62,3 +62,5 @@ In this example:
 - Manager 2 has a positive bias of 0.2, meaning they tend to overrate employees
 
 By adjusting the scores based on these biases, the program provides fair, unbiased ratings that better reflect the true performance of employees.
+
+###For detailed installation and configuration steps, see [Installation Instructions (Install.md)](./Install.md).
